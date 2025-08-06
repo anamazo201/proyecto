@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mi Primer Formulario HTML</title>
+        <link rel="stylesheet" href="Style.css" />
+    </head>
+    <body class="body-bg">
+        <div class="container">
+            <h1 class="h1-bg">🧑‍💻 FORMULARIO SENA V1 </h1>
+            <p><center>GRACIAS POR DEJAR SUS DATOS</center></p>
+            <form id="miFormulario">
+                <!-- Campo de texto simple -->
+                <div class="form-group">
+                    <label for="nombre">Nombre completo:</label>
+                    <input
+                        type="text"
+                        id="nombre"
+                        name="nombre"
+                        required
+                        placeholder="Escribe tu nombre completo"
+                        autofocus
+                        pattern="[A-za-z ]{3,40}" />
+                </div>
+
+                <!-- Campo de email -->
+                <div class="form-group">
+                    <label for="email">Correo electrónico:</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        placeholder="ejemplo@correo.com" />
+                </div>
+
+                <!-- Campo de número -->
+                <div class="form-group">
+                    <label for="edad">Edad:</label>
+                    <input
+                        type="number"
+                        id="edad"
+                        name="edad"
+                        min="18"
+                        max="100"
+                        required
+                        placeholder="Tu edad" />
+                </div>
+
+                <!-- Campo de selección -->
+                <div class="form-group">
+                    <label for="ciudad">ELIGE LA OPCION:</label>
+                    <select id="ciudad" name="ciudad" required>
+                        <option value>Selecciona una opcion</option>
+                        <option value="si">si</option>
+                        <option value="no">no</option>
+                        <option value="tal vez">tal vez</option>
+                    </select>
+                </div>
+
+                <!-- Campos de radio -->
+                <div class="form-group">
+                    <label>¿planeas comprar un coche nuevo en los proximos 5
+                        años?</label>
+                    <input
+                        type="radio"
+                        id="principiante"
+                        name="experiencia"
+                        value="principiante"
+                        required />
+                    <label for="principiante"
+                        class="inline-label">si</label><br />
+                    <input
+                        type="radio"
+                        id="intermedio"
+                        name="experiencia"
+                        value="intermedio" />
+                    <label for="intermedio"
+                        class="inline-label">no</label><br />
+                    <input
+                        type="radio"
+                        id="avanzado"
+                        name="experiencia"
+                        value="avanzado" />
+                    <label for="avanzado" class="inline-label">tal vez</label>
+                </div>
+
+                <style>
+          /* Oculta los radios originales */
+          input[type="radio"].cuadro {
+            appearance: none;
+            -webkit-appearance: none;
+            background-color: #fff;
+            border: 2px solid #444;
+            width: 16px;
+            height: 16px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+            cursor: pointer;
+          }
+
+          /* Estilo cuando está seleccionado */
+          input[type="radio"].cuadro:checked {
+            background-color: #444;
+          }
+
+          /* Alineación de las opciones */
+          .form-group label.option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 6px;
+            cursor: pointer;
+          }
+        </style>
+
+                <!-- Campo de selección -->
+                <div class="form-group">
+                    <label for="marca">ELIGE LA OPCION:</label>
+                    <select id="marca" name="marca" required>
+                        <option value>¿Cuál es tu marca de coche
+                            favorita?</option>
+                        <option value="ford">ford</option>
+                        <option value="honda">honda</option>
+                        <option value="BMW">BMW</option>
+                        <option value="toyota">toyota</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>¿que tipo de medio de trasporte posee?</label><br />
+
+                    <label class="option">
+                        <input
+                            type="radio"
+                            class="cuadro"
+                            name="marca"
+                            value="carro"
+                            required />Carro
+                    </label>
+
+                    <label class="option">
+                        <input type="radio" class="cuadro" name="marca"
+                            value="barco" /> Barco
+                    </label>
+
+                    <label class="option">
+                        <input type="radio" class="cuadro" name="marca"
+                            value="bote" /> Bote
+                    </label>
+
+                    <label class="option">
+                        <input
+                            type="radio"
+                            class="cuadro"
+                            name="marca"
+                            value="motocicleta" /> Motocicleta
+                    </label>
+
+                    <label class="option">
+                        <input
+                            type="radio"
+                            class="cuadro"
+                            name="marca"
+                            value="bicicleta" /> Bicicleta
+                    </label>
+                </div>
+
+                <!-- Área de texto -->
+                <div class="form-group">
+                    <label for="comentarios">¿algun comentario que
+                        sugiera?:</label>
+                    <textarea
+                        id="comentarios"
+                        name="comentarios"
+                        rows="4"
+                        placeholder="por favor agrega tu comentario"></textarea>
+                </div>
+
+                <!-- Botón de envío original -->
+                <button type="submit">🚀 Enviar Formulario</button>
+            </form>
+
+            <div id="resultado" class="resultado">
+                <h3>✅ ¡Formulario enviado exitosamente!</h3>
+                <p>Estos son los datos que enviaste:</p>
+                <div id="datosEnviados"></div>
+            </div>
+        </div>
+
+        <script>
+      document
+        .getElementById("miFormulario")
+        .addEventListener("submit", function (evento) {
+          evento.preventDefault();
+          const formulario = evento.target;
+          const datosFormulario = new FormData(formulario);
+          console.log("📊 Datos del formulario:");
+          for (let [campo, valor] of datosFormulario.entries()) {
+            console.log(`${campo}: ${valor}`);
+          }
+          let datosHTML = "";
+          for (let [campo, valor] of datosFormulario.entries()) {
+            let nombreCampo = campo;
+            switch (campo) {
+              case "nombre":
+                nombreCampo = "Nombre completo";
+                break;
+              case "email":
+                nombreCampo = "Correo electrónico";
+                break;
+              case "edad":
+                nombreCampo = "Edad";
+                break;
+              case "ciudad":
+                nombreCampo = "Ciudad";
+                break;
+              case "experiencia":
+                nombreCampo = "Experiencia en programación";
+                break;
+              case "acepto":
+                nombreCampo = "Términos aceptados";
+                break;
+              case "comentarios":
+                nombreCampo = "Comentarios";
+                break;
+            }
+            if (valor && valor.trim() !== "") {
+              datosHTML += `<div class="dato"><span class="etiqueta">${nombreCampo}:</span> ${valor}</div>`;
+            }
+          }
+          document.getElementById("datosEnviados").innerHTML = datosHTML;
+          document.getElementById("resultado").style.display = "block";
+          document
+            .getElementById("resultado")
+            .scrollIntoView({ behavior: "smooth" });
+          alert("¡Formulario enviado correctamente! 🎉\nRevisa los datos más abajo.");
+        });
+    </script>
+    </body>
+</html>
